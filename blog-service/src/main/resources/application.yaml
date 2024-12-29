@@ -1,0 +1,33 @@
+server:
+  port: 5000
+  servlet:
+    context-path: /blog
+spring:
+  application:
+    name: tech-blog
+  datasource:
+    url: jdbc:postgresql://ep-sweet-lake-a17eifcc.ap-southeast-1.aws.neon.tech/tech-blog
+    username: tech-blog_owner
+    password: pSdAw0rT4CHg
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      platform: postgresql
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
+
+
+
+bezkoder:
+  app:
+    jwtSecret: ======================BezKoder=Spring===========================
+    jwtExpirationMs: 86400000
+
+redis:
+  host: 127.0.0.1
+  port: 6379

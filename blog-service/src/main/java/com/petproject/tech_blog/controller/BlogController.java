@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+// import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/blogs")
+@RequestMapping("/blogs")
 public class BlogController {
     @Autowired
     private BlogService blogService;
@@ -36,7 +36,7 @@ public class BlogController {
         return SuccessResponse.of(blogService.getBlogById(Long.parseLong(id)));
     }
 
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+   // @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<SuccessResponse<Blog>> createBlog(@RequestBody Blog blog) {
         return SuccessResponse.of(blogService.createBlog(blog));

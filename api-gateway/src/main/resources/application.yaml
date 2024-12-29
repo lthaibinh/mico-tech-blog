@@ -9,6 +9,17 @@ spring:
     name: api-gateway
   cloud: 
     gateway:
+      globalcors:
+          cors-configurations:
+            '[/**]':
+              allowedOrigins: "http://localhost:3000"  # Explicitly allow your frontend origin
+              allowedHeaders: "*"  # Allow all headers (adjust as necessary for security)
+              allowedMethods:
+                - GET
+                - POST
+                - PUT
+                - DELETE
+              allowCredentials: true  # Include credentials like cookies if needed
       routes:
         - id: identity_service
           uri: 'http://localhost:8082'
@@ -20,5 +31,11 @@ spring:
           uri: 'http://localhost:8081'
           predicates:
             - Path=${app.api-prefix}/profile/users/**
+          filters:
+            - StripPrefix=${app.strip-prefix}
+        - id: blog_service
+          uri: 'http://localhost:5000'
+          predicates:
+            - Path=${app.api-prefix}/blog/**
           filters:
             - StripPrefix=${app.strip-prefix}
