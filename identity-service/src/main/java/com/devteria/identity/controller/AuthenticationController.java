@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devteria.identity.dto.request.*;
+import com.devteria.identity.dto.response.ApiResponse;
 import com.devteria.identity.dto.response.AuthenticationResponse;
 import com.devteria.identity.dto.response.IntrospectResponse;
 import com.devteria.identity.service.AuthenticationService;
@@ -27,21 +28,21 @@ public class AuthenticationController {
     @PostMapping("/token")
     ApiResponse<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
         var result = authenticationService.authenticate(request);
-        return ApiResponse.<AuthenticationResponse>builder().result(result).build();
+        return ApiResponse.<AuthenticationResponse>builder().data(result).build();
     }
 
     @PostMapping("/introspect")
     ApiResponse<IntrospectResponse> authenticate(@RequestBody IntrospectRequest request)
             throws ParseException, JOSEException {
         var result = authenticationService.introspect(request);
-        return ApiResponse.<IntrospectResponse>builder().result(result).build();
+        return ApiResponse.<IntrospectResponse>builder().data(result).build();
     }
 
     @PostMapping("/refresh")
     ApiResponse<AuthenticationResponse> authenticate(@RequestBody RefreshRequest request)
             throws ParseException, JOSEException {
         var result = authenticationService.refreshToken(request);
-        return ApiResponse.<AuthenticationResponse>builder().result(result).build();
+        return ApiResponse.<AuthenticationResponse>builder().data(result).build();
     }
 
     @PostMapping("/logout")
